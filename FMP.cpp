@@ -1,5 +1,9 @@
 #include <iostream>
 #include <string>
+#include "Seat.h"
+#include "Passenger.h"
+#include "Flight.h"
+#include "Airline.h"
 using namespace std;
 
 void displayTitlePage();
