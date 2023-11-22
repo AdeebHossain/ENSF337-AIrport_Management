@@ -1,3 +1,5 @@
+#include <string>
+
 #ifndef SEAT_H
 #define SEAT_H
 class Seat {
