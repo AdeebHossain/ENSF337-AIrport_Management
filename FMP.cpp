@@ -1,15 +1,14 @@
 #include <iostream>
-#include <string>
-// #include "Seat.h"
-// #include "Passenger.h"
-// #include "Flight.h"
-// #include "Airline.h"
+#include <iomanip>
+#include "Seat.h"
+#include "Passenger.h"
+#include "Flight.h"
+#include "Airline.h"
 using namespace std;
 
 void displayTitlePage();
 void displayMenu();
-void display_seat_map ();
-void display_passenger_info ();
+int validChoice(string userInput);
 
 
 int main () {
@@ -26,34 +25,48 @@ int main () {
     do{
         cout << endl;
         displayMenu();
-        cout << "Enter your choice: (1, 2; 3, 4, 5 or 6) ";
+        cout << "Enter your choice: (1, 2, 3, 4, 5 or 6) ";
         getline(cin, userInput);
-        cout << endl;
 
-        /*
-          If input entered is not a number, display will keep repeating until
-          it is a valid number. Then the while condition will handle anything 
-          that isn't a number between 1-6. We'll put a switch case in after this 
-          block to actually do the following thing.
-        */
-
-        try {
-            userChoice = stoi(userInput); //Converts entered string into an integer
-        } catch (const invalid_argument& e) { 
-            userChoice = -1; //Invalid choice means userChoice will be -1 for now
-        }
-
-        switch (userChoice)
-        {
+        /*  If input entered is not a number, display will keep repeating until
+            it is a valid number. Then the while condition will handle anything 
+            that isn't a number between 1-6. */
+        userChoice = validChoice(userInput);
+        switch (userChoice) {
         case 1:
-            display_seat_map();
-            cout << "\n<<< Press Return to Continue >>>\n";
+            //display_seat_map();
+            cout << "\n<<< Press Return to Continue >>>";
+            getline(cin, userInput);
             break;
         
+        case 2:
+            //display_passenger_info();
+            cout << "\n<<< Press Return to Continue >>>";
+            getline(cin, userInput);
+            break;
+
+        case 3:
+            break;
+
+        case 4:
+            break;
+
+        case 5:
+            cout << "\nDo you want to save the data in the " << "\"flight_info.txt\"" << "? Please answer <Y or N> ";
+            getline(cin, userInput);
+            if(userInput == "Y" || userInput == "y") {
+                cout << "\nAll the data in the passenger list was saved into the flight_info.txt." << endl;
+            }
+            cout << "\n<<< Press Return to Continue >>>";
+            getline(cin, userInput);
+            break;
+
         default:
             break;
         }
     } while (userChoice != 6);
+
+    cout << "\nProgram terminated.\n\n";
 
     return 0;
 }
@@ -75,33 +88,13 @@ void displayMenu () {
          << "6. Quit.\n\n";
 }
 
-/* Ignore the rest of this below, it'll be moved elsewhere*/
-void display_seat_map () {
-    int rows = 24;
-    int columns = 6;
-    cout << "       Aircraft Seat Map       " << endl;
-    cout << "     A   B   C   D   E   F" << endl;
-    for (int i = 0; i < rows; i++) {
-        cout << "   +---+---+---+---+---+---+" << endl;
-        if(i < 10) {
-            cout << i << "  |   |   |   |   |   |   |" << endl;
-        } else {
-            cout << i << " |   |   |   |   |   |   |" << endl;
-        }
-        for (int j = 0; j < columns; j++) {
-            
-        }
+int validChoice (string userInput) {
+    int userChoice;
+    try {
+        userChoice = stoi(userInput); //Converts entered string into an integer
+    } catch (const invalid_argument& e) { 
+        userChoice = -1; //Invalid choice means userChoice will be -1 for now
     }
-    cout << "   +---+---+---+---+---+---+" << endl;
-}
-
-/* 
-    NOTE TO SELF:
-    Going to use iomanip for formatting. Its the only way to make it look nice (code wise)
-    and also somewhat readable. Also include File reader blah blah function. Blah blah
-    Lastly, make sure to move these to their correct place, uncomment the headers when they
-    are ready, and fix the strings for names so they actually take in strings (for the classes)
-*/
-void display_passenger_info () {
-
+    
+    return userChoice;
 }
