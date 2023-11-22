@@ -61,7 +61,7 @@ int main () {
 void displayTitlePage () {
     cout << "Version: 1.0\n"
          << "Term Project - Flight Management Program in C++\n"
-         << "Produced by: YOUR MOM LOL FUCK YOU AT ASS\n"
+         << "Produced by: Your Dad\n"
          << "Year: 2023\n\n";
 }
 
@@ -95,6 +95,13 @@ void display_seat_map () {
     cout << "   +---+---+---+---+---+---+" << endl;
 }
 
+/* 
+    NOTE TO SELF:
+    Going to use iomanip for formatting. Its the only way to make it look nice (code wise)
+    and also somewhat readable. Also include File reader blah blah function. Blah blah
+    Lastly, make sure to move these to their correct place, uncomment the headers when they
+    are ready, and fix the strings for names so they actually take in strings (for the classes)
+*/
 void display_passenger_info () {
 
 }
