@@ -1,10 +1,11 @@
 #include <iostream>
-#include "Passenger.h"
 #include <iomanip>
+#include "Passenger.h"
 using namespace std;
 
 /* Constructor */
 Passenger::Passenger(): FName(NULL), LName(NULL), PhoneNum(NULL), PID(0), PSeat(nullptr) {};
+
 Passenger::Passenger(const Passenger& source) {
     this->FName = source.FName;
     this->LName = source.LName;
@@ -19,11 +20,11 @@ Passenger::~Passenger() {
 }
 
 /* Setters */
-void Passenger::set_Fname(string FName) {
+void Passenger::set_FName(string FName) {
     this->FName = FName;
 }
 
-void Passenger::set_Lname(string LName) {
+void Passenger::set_LName(string LName) {
     this->LName = LName;
 }
 
@@ -61,13 +62,6 @@ Seat* Passenger::get_PSeat()const {
 }
 
 /* Member Functions*/
-void Passenger::add_passenger(const Passenger& person) {
-
-}
-
-void Passenger::remove_passenger(const Passenger& person) {
-
-}
 
 void Passenger::display_passenger_info(string FName, string LName, string PhoneNum, Seat *PSeat, int PID) {
     cout << setw(15) << left << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone";

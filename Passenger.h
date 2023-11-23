@@ -24,8 +24,8 @@ public:
     ~Passenger();
 
     /* Setters */
-    void set_Fname(string Fname);
-    void set_Lname(string Lname);
+    void set_FName(string Fname);
+    void set_LName(string Lname);
     void set_PhoneNum(string PhoneNum);
     void set_PID(int PID);
     void set_PSeat(Seat* PSeat);
@@ -38,8 +38,6 @@ public:
     Seat *get_PSeat()const;
 
     /* Member Functions*/
-    void add_passenger(const Passenger& person);
-    void remove_passenger(const Passenger& person);
     void display_passenger_info(string FName, string LName, string PhoneNum, Seat *PSeat, int PID);
 
 };

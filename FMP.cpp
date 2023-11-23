@@ -4,7 +4,9 @@
 #include "Passenger.h"
 #include "Flight.h"
 #include "Airline.h"
+#include "Linked_List.h"
 using namespace std;
+
 
 void displayTitlePage();
 void displayMenu();
@@ -13,6 +15,8 @@ int validChoice(string userInput);
 
 int main () {
     string userInput;
+    string inputForPassenger;
+    //Passenger list;
 
     do{
         displayTitlePage();    
@@ -45,7 +49,35 @@ int main () {
             getline(cin, userInput);
             break;
 
-        case 3:
+        case 3: 
+            {
+                Passenger *new_passenger = new Passenger;
+                char seat;
+
+                cout << "Please enter the Passenger's ID: ";
+                getline(cin, inputForPassenger);
+                new_passenger->set_PID(validChoice(inputForPassenger));
+
+                cout << "Please enter the Passenger's First Name: ";
+                getline(cin, inputForPassenger);
+                new_passenger->set_FName(inputForPassenger);
+
+                cout << "Please enter the Passenger's Last Name: ";
+                getline(cin, inputForPassenger);
+                new_passenger->set_LName(inputForPassenger);
+
+                cout << "Please enter the Passenger's Phone Number: ";
+                getline(cin, inputForPassenger);
+                new_passenger->set_PhoneNum(inputForPassenger);
+
+                cout << "Enter the Passenger's desired row: ";
+                getline(cin, inputForPassenger);
+                new_passenger->get_PSeat()->set_row(validChoice(inputForPassenger));
+
+                cout << "Enter the Passenger's desired seat: ";
+                cin >> seat;
+                new_passenger->get_PSeat()->set_column(seat);
+            }
             break;
 
         case 4:
