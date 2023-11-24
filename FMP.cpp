@@ -16,12 +16,14 @@ int validChoice(string userInput);
 int main () {
     string userInput;
     string inputForPassenger;
-    //Passenger list;
+    Flight new_flight;
+    Passenger new_passenger;
 
     do{
         displayTitlePage();    
         cout << "<<< Press Return to Continue >>>";
         getline(cin, userInput);
+        system("clear");
 
     } while (!userInput.empty()); //Repeats until user hits enter
 
@@ -38,45 +40,46 @@ int main () {
         userChoice = validChoice(userInput);
         switch (userChoice) {
         case 1:
-            //display_seat_map();
+            new_flight.display_seat_map(24, 5, new_passenger);
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
+            system("clear");
             break;
         
         case 2:
-            //display_passenger_info();
+            new_flight.get_person().display_passenger_info(new_passenger.get_FName(), new_passenger.get_LName(), new_passenger.get_PhoneNum(), new_passenger.get_PID());
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
+            system("clear");
             break;
 
         case 3: 
             {
-                Passenger *new_passenger = new Passenger;
-                char seat;
+                // char seat;
 
                 cout << "Please enter the Passenger's ID: ";
                 getline(cin, inputForPassenger);
-                new_passenger->set_PID(validChoice(inputForPassenger));
+                new_passenger.set_PID(validChoice(inputForPassenger));
 
                 cout << "Please enter the Passenger's First Name: ";
                 getline(cin, inputForPassenger);
-                new_passenger->set_FName(inputForPassenger);
+                new_passenger.set_FName(inputForPassenger);
 
                 cout << "Please enter the Passenger's Last Name: ";
                 getline(cin, inputForPassenger);
-                new_passenger->set_LName(inputForPassenger);
+                new_passenger.set_LName(inputForPassenger);
 
                 cout << "Please enter the Passenger's Phone Number: ";
                 getline(cin, inputForPassenger);
-                new_passenger->set_PhoneNum(inputForPassenger);
+                new_passenger.set_PhoneNum(inputForPassenger);
 
-                cout << "Enter the Passenger's desired row: ";
-                getline(cin, inputForPassenger);
-                new_passenger->get_PSeat()->set_row(validChoice(inputForPassenger));
+                // cout << "Enter the Passenger's desired row: ";
+                // getline(cin, inputForPassenger);
+                // new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
 
-                cout << "Enter the Passenger's desired seat: ";
-                cin >> seat;
-                new_passenger->get_PSeat()->set_column(seat);
+                // cout << "Enter the Passenger's desired seat: ";
+                // cin >> seat;
+                // new_passenger.get_PSeat()->set_column(seat);
             }
             break;
 
@@ -91,6 +94,7 @@ int main () {
             }
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
+            system("clear");
             break;
 
         default:

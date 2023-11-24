@@ -5,8 +5,9 @@ using namespace std;
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+typedef Passenger Passenger_list;
 struct Node { 
-    Passenger human;
+    Passenger_list passenger;
     Node *next;
 };
 
@@ -25,7 +26,7 @@ public:
 
     /* Getters */
 
-    void add_passenger(const Passenger& person);
-    void remove_passenger(const Passenger& person);
+    void add_passenger(const Passenger_list& passenger);
+    void remove_passenger(const Passenger_list& passenger);
 };
 #endif
