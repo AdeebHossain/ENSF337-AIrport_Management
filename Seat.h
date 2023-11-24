@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string>
-#include <cassert>
 using namespace std;
 
 #ifndef SEAT_H
@@ -10,7 +8,7 @@ private:
     /* Members */
     int row;
     char column;
-    Seat *seat_status;
+    char seat_status;
 
 public:
     /* Constructor */
@@ -23,12 +21,12 @@ public:
     /* Setters */
     void set_row(int row);
     void set_column(char column);
-    void set_seat_status(Seat *seat_status);
+    void set_seat_status(char seat_status);
 
     /* Getters */
     int get_row()const;
     char get_column()const;
-    Seat *get_seat_status()const;
+    char get_seat_status()const;
 
     /*Member Functions*/
     

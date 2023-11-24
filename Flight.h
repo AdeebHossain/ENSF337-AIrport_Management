@@ -1,9 +1,4 @@
-#include <iostream>
-#include <string>
-#include <cassert>
-#include <iomanip>
-#include "Seat.h"
-#include "Passenger.h"
+#include "Linked_List.h"
 using namespace std;
 
 #ifndef FLIGHT_H
@@ -37,7 +32,7 @@ public:
     Passenger get_person()const;
 
     /* Member Functions */
-    void display_seat_map(int rows, int columns, Seat Pseat);
+    void display_seat_map(int rows, int columns, Passenger person) const;
 
 };
 #endif
