@@ -1,10 +1,15 @@
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <iomanip>
 #include "Flight.h"
 using namespace std;
 
 /* Constrcutors */
-Flight::Flight(): name("\0"), rows(0), columns(0), person() {}; 
+Flight::Flight(): name("\0"), rows(0), columns(0), person() { };
+
+Flight::Flight(string Name, int num_row, int num_col): name(Name), rows(num_row), columns(num_col), person() { };
+
 Flight::Flight(const Flight& source) {
     this->name = source.name;
     this->rows = source.rows;
@@ -77,4 +82,13 @@ void Flight::display_seat_map (int rows, int columns, Passenger person) const{
         }
         cout << "+" << endl;
     }
+}
+
+void Flight::save_to_file(string file_name) {
+    ofstream file(file_name);
+    if (!file.is_open()) {
+        cerr << "Error opening file: " << file_name << endl;
+        return;
+    }
+    file << name << rows << columns << endl;
 }
