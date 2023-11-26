@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include "Seat.h"
 #include "Passenger.h"
@@ -11,6 +12,7 @@ using namespace std;
 void displayTitlePage();
 void displayMenu();
 int validChoice(string userInput);
+void readFromFile(const string& fileName);
 
 
 int main () {
@@ -133,4 +135,48 @@ int validChoice (string userInput) {
     }
     
     return userChoice;
+}
+
+void readFromFile(const string& fileName) {
+    ifstream file(fileName);
+    if (!file.is_open()) {
+        cerr << "Error opening file: " << fileName << endl;
+        return;
+    }
+
+    int rows, columns;
+    string name;
+    file >> name >> rows >> columns;
+    cout << name << " " << rows << " " << columns << endl;
+
+    Flight flight(name, rows, columns);
+
+    // Read passenger information
+    string line;
+    while (getline(file, line)) {
+
+        // Kept getting an error where it tried to read the first line as empty
+        if (line.empty()) {
+            continue;
+        }
+
+        // All lines are strictly 69 characters long
+        if (line.length() < 69) { // haha funny
+            cerr << "Error: Line is too short. Length: " << line.length() << endl;
+            continue; 
+        }
+
+        // Manually parse the line
+        string firstName = line.substr(0, 20);  // 20 Characters long
+        string lastName = line.substr(20, 20);  // 20 Characters long
+        string phoneNumber = line.substr(40, 15);  // 12 characters
+        string seat = line.substr(60, 4);  // 4 characters
+        int id = stoi(line.substr(64, 5));  // 5 characters
+
+        cout << "First Name: " << firstName << " Last Name: " << lastName
+             << " Phone Number: " << phoneNumber << " Seat: " << seat << " ID: " << id << endl;
+
+    }
+
+    file.close();
 }
