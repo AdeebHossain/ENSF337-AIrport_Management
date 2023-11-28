@@ -55,7 +55,7 @@ Passenger Flight::get_person()const {
 void Flight::populate_seat_map(){
     for (int i = 0; i < rows; i++){
         for (int j = 0; j< columns; j++){
-            seat_map[i][j].set_seat_status('0');
+            seat_map[i][j].set_seat_status(false);
         }
     }
 }
