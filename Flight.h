@@ -1,4 +1,5 @@
 #include "Linked_List.h"
+#include <vector>
 using namespace std;
 
 #ifndef FLIGHT_H
@@ -10,6 +11,7 @@ private:
     int rows;
     int columns;
     Passenger person;
+    vector<vector<Seat>> seat_map;
 
 public:
     /* Constructor */
@@ -32,6 +34,7 @@ public:
     Passenger get_person()const;
 
     /* Member Functions */
+    void populate_seat_map();
     void display_seat_map(int rows, int columns, Passenger person) const;
 
 };
