@@ -91,4 +91,19 @@ void Flight::save_to_file(string file_name) {
         return;
     }
     file << name << rows << columns << endl;
+
+    /* Need to traverse through the linked list and collect data
+     from each node and write that data into the file*/
+
+    
+    Node* current = person.headM;
+    while(*current != 0) {
+        file << setw(20) << current->passenger.get_FName();
+        file << setw(20) << current->passenger.get_LName();
+        file << setw(15) << current->passenger.get_PhoneNum();
+        file << setw(4) << current->passenger.get_PSeat();
+        file << setw(5) << current->passenger.get_PID() << endl;
+        current = current->next;
+    }
+        
 }
