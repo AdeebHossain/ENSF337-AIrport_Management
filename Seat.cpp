@@ -23,7 +23,7 @@ void Seat::set_column(char column) {
     this->column = column;
 }
 
-void Seat::set_seat_status(char seat_status) {
+void Seat::set_seat_status(bool seat_status) {
     this->seat_status = seat_status;
 }
 
@@ -36,7 +36,7 @@ char Seat::get_column()const {
     return this->column;
 }
 
-char Seat::get_seat_status()const {
+bool Seat::get_seat_status()const {
     return this->seat_status;
 }
 

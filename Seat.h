@@ -8,7 +8,7 @@ private:
     /* Members */
     int row;
     char column;
-    char seat_status;
+    bool seat_status; //true if occupied, false if empty
 
 public:
     /* Constructor */
@@ -21,12 +21,12 @@ public:
     /* Setters */
     void set_row(int row);
     void set_column(char column);
-    void set_seat_status(char seat_status);
+    void set_seat_status(bool seat_status);
 
     /* Getters */
     int get_row()const;
     char get_column()const;
-    char get_seat_status()const;
+    bool get_seat_status()const;
 
     /*Member Functions*/
     
