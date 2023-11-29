@@ -4,12 +4,12 @@
 using namespace std;
 
 /* Constrcutors */
-Flight::Flight(): name("\0"), rows(0), columns(0), person() {}; 
+Flight::Flight(): name("\0"), rows(0), columns(0), passenger_list() {}; 
 Flight::Flight(const Flight& source) {
     this->name = source.name;
     this->rows = source.rows;
     this->columns = source.columns;
-    this->person = source.person;
+    this->passenger_list = source.passenger_list;
     //populate_seat_map();
 };
 
@@ -31,8 +31,8 @@ void Flight::set_columns(int columns) {
     this->columns = columns;
 }
 
-void Flight::set_person(Passenger person) {
-    this->person = person;
+void Flight::set_passenger(Passenger_list passenger) {
+    this->passenger_list = passenger;
 }
 
 /* Getters */
@@ -48,8 +48,8 @@ int Flight::get_columns()const {
     return this->columns;
 }
 
-Passenger Flight::get_person()const {
-    return this->person;
+Passenger_list Flight::get_passenger()const {
+    return this->passenger_list;
 }
 
 // void Flight::populate_seat_map(){
@@ -86,4 +86,16 @@ void Flight::display_seat_map () const{
         }
         cout << "+" << endl;
     }
+}
+
+void Flight::display_list_of_passengers()const { 
+    //Need to get seat info
+    cout << setw(15) << left << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone";
+    cout << setw(7) << "Row" << setw(8) << "Seat" << "ID" << endl;
+    for(int i = 0; i < 3; i++) {
+        cout << "------------------------------------------------------------------" << endl;
+        cout << setw(15) << passenger_list.get_LName() << setw(15) << passenger_list.get_LName() << setw(15) << passenger_list.get_PhoneNum();
+        cout << setw(7) << passenger_list.get_PSeat()->get_row() << setw(8) << passenger_list.get_PSeat()->get_column() << passenger_list.get_PID() << endl;
+    }
+    cout << "------------------------------------------------------------------" << endl;
 }

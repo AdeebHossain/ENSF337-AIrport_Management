@@ -2,7 +2,7 @@
 #include "Linked_List.h"
 using namespace std;
 
-linked_list::linked_list(): headM(nullptr) {}; 
+linked_list::linked_list(): headM(0) {}; 
 
 linked_list::linked_list(const linked_list& source) {
     if(source.headM == nullptr) {
@@ -61,6 +61,7 @@ void linked_list::remove_passenger(const Passenger_list& PRemoving) {
         return;
 
     Node *doomed_node = 0;
+    
     if (PRemoving.get_PSeat()->get_seat_status() == '\0') {   
         doomed_node = headM;
         headM = headM->next;

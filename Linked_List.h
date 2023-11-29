@@ -14,7 +14,6 @@ struct Node {
 class linked_list {
 private:
     Node *headM;
-    int number_of_passengers;
     
 public:
     /* Constructor */

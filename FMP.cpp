@@ -16,13 +16,12 @@ int validChoice(string userInput);
 int main () {
     string userInput;
     string inputForPassenger;
-    Flight new_flight;
-    Passenger new_passenger;
+    Airline new_airline;
 
     do{
         displayTitlePage();    
         cout << "<<< Press Return to Continue >>>";
-        getline(cin, userInput);
+        cin.ignore();
         system("clear");
 
     } while (!userInput.empty()); //Repeats until user hits enter
@@ -41,22 +40,23 @@ int main () {
         userChoice = validChoice(userInput);
         switch (userChoice) {
         case 1:
-            new_flight.display_seat_map();
+            new_airline.get_flight().display_seat_map();
             cout << "\n<<< Press Return to Continue >>>";
-            getline(cin, userInput);
+            cin.ignore();
             system("clear");
             break;
         
         case 2:
-            new_flight.get_person().display_passenger_info();
+            new_airline.get_flight().display_list_of_passengers();
             cout << "\n<<< Press Return to Continue >>>";
-            getline(cin, userInput);
+            cin.ignore();
             system("clear");
             break;
 
         case 3: 
             {
                 char seat;
+                Passenger new_passenger;
 
                 cout << "Please enter the Passenger's ID: ";
                 getline(cin, inputForPassenger);
@@ -80,7 +80,9 @@ int main () {
 
                 cout << "Enter the Passenger's desired seat: ";
                 cin >> seat;
-                new_passenger.get_PSeat()->set_column(seat);
+                new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
+
+                new_airline.get_flight().set_passenger(new_passenger);
             }
             break;
 

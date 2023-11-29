@@ -10,7 +10,7 @@ private:
     string name;
     int rows;
     int columns;
-    Passenger person;
+    Passenger_list passenger_list;
     //vector<vector<Seat>> seat_map;
 
 public:
@@ -25,17 +25,18 @@ public:
     void set_name(string name);
     void set_rows(int rows);
     void set_columns(int columns);
-    void set_person(Passenger person);
+    void set_passenger(Passenger_list passenger);
 
     /* Getters */
     string get_name()const;
     int get_rows()const;
     int get_columns()const;
-    Passenger get_person()const;
+    Passenger_list get_passenger()const;
 
     /* Member Functions */
     void populate_seat_map();
-    void display_seat_map() const;
+    void display_seat_map()const;
+    void display_list_of_passengers()const;
 
 };
 #endif
