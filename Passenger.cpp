@@ -4,19 +4,19 @@
 using namespace std;
 
 /* Constructor */
-Passenger::Passenger(): FName("\0"), LName("\0"), PhoneNum("\0"), PID(0) {}; //INCLUDE SEAT
+Passenger::Passenger(): FName("\0"), LName("\0"), PhoneNum("\0"), PSeat(new Seat), PID(0) {}; 
 
 Passenger::Passenger(const Passenger& source) {
     this->FName = source.FName;
     this->LName = source.LName;
     this->PhoneNum = source.PhoneNum;
-    // this->PSeat = source.PSeat;
+    this->PSeat = source.PSeat;
     this->PID = source.PID;
 }
 
 /* Destructor */
 Passenger::~Passenger() {
-    // delete PSeat;
+    delete PSeat;
 }
 
 /* Setters */
@@ -32,9 +32,9 @@ void Passenger::set_PhoneNum(string PhoneNum) {
     this->PhoneNum = PhoneNum;
 }
 
-// void Passenger::set_PSeat(Seat* PSeat) {
-//     this->PSeat = PSeat;
-// }
+void Passenger::set_PSeat(Seat* PSeat) {
+    this->PSeat = PSeat;
+}
 
 void Passenger::set_PID(int PID) {
     this->PID = PID;
@@ -53,9 +53,9 @@ string Passenger::get_PhoneNum()const {
     return this->PhoneNum;
 }
 
-// Seat* Passenger::get_PSeat()const {
-//     return this->PSeat;
-// }
+Seat* Passenger::get_PSeat()const {
+    return this->PSeat;
+}
 
 int Passenger::get_PID()const {
     return this->PID;
@@ -63,14 +63,14 @@ int Passenger::get_PID()const {
 
 /* Member Functions*/
 
-void Passenger::display_passenger_info(string FName, string LName, string PhoneNum, int PID) { 
+void Passenger::display_passenger_info()const { 
     //Need to get seat info
     cout << setw(15) << left << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone";
     cout << setw(7) << "Row" << setw(8) << "Seat" << "ID" << endl;
     for(int i = 0; i < 3; i++) {
         cout << "------------------------------------------------------------------" << endl;
         cout << setw(15) << FName << setw(15) << LName << setw(15) << PhoneNum;
-        cout << setw(7) << "ROW" << setw(8) << "COL" << PID << endl;
+        cout << setw(7) << "Row" << setw(8) << "Col" << PID << endl;
     }
     cout << "------------------------------------------------------------------" << endl;
 }

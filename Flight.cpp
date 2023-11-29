@@ -10,7 +10,7 @@ Flight::Flight(const Flight& source) {
     this->rows = source.rows;
     this->columns = source.columns;
     this->person = source.person;
-    populate_seat_map();
+    //populate_seat_map();
 };
 
 /* Destructors */
@@ -52,15 +52,15 @@ Passenger Flight::get_person()const {
     return this->person;
 }
 
-void Flight::populate_seat_map(){
-    for (int i = 0; i < rows; i++){
-        for (int j = 0; j< columns; j++){
-            seat_map[i][j].set_seat_status('0');
-        }
-    }
-}
+// void Flight::populate_seat_map(){
+//     for (int i = 0; i < rows; i++){
+//         for (int j = 0; j< columns; j++){
+//             seat_map[i][j].set_seat_status('0');
+//         }
+//     }
+// }
 
-void Flight::display_seat_map (int rows, int columns, Passenger person) const{
+void Flight::display_seat_map () const{
     char letter = 'A'; //will be removed to use PSeat.get_column() since this will give a character
     cout << setw(columns + 1) << "" << setfill(' ') << setw(20) << left << "Aircraft Seat Map" << endl << "     ";
     for (int i = 0; i < columns; i++) {

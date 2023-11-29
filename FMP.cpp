@@ -37,17 +37,18 @@ int main () {
         /*  If input entered is not a number, display will keep repeating until
             it is a valid number. Then the while condition will handle anything 
             that isn't a number between 1-6. */
+
         userChoice = validChoice(userInput);
         switch (userChoice) {
         case 1:
-            new_flight.display_seat_map(24, 5, new_passenger);
+            new_flight.display_seat_map();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
             system("clear");
             break;
         
         case 2:
-            new_flight.get_person().display_passenger_info(new_passenger.get_FName(), new_passenger.get_LName(), new_passenger.get_PhoneNum(), new_passenger.get_PID());
+            new_flight.get_person().display_passenger_info();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
             system("clear");
@@ -55,7 +56,7 @@ int main () {
 
         case 3: 
             {
-                // char seat;
+                char seat;
 
                 cout << "Please enter the Passenger's ID: ";
                 getline(cin, inputForPassenger);
@@ -73,13 +74,13 @@ int main () {
                 getline(cin, inputForPassenger);
                 new_passenger.set_PhoneNum(inputForPassenger);
 
-                // cout << "Enter the Passenger's desired row: ";
-                // getline(cin, inputForPassenger);
-                // new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
+                cout << "Enter the Passenger's desired row: ";
+                getline(cin, inputForPassenger);
+                new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
 
-                // cout << "Enter the Passenger's desired seat: ";
-                // cin >> seat;
-                // new_passenger.get_PSeat()->set_column(seat);
+                cout << "Enter the Passenger's desired seat: ";
+                cin >> seat;
+                new_passenger.get_PSeat()->set_column(seat);
             }
             break;
 
@@ -97,9 +98,10 @@ int main () {
             system("clear");
             break;
 
-        default:
+        case 6:
             break;
         }
+
     } while (userChoice != 6);
 
     cout << "\nProgram terminated.\n\n";

@@ -14,6 +14,7 @@ struct Node {
 class linked_list {
 private:
     Node *headM;
+    int number_of_passengers;
     
 public:
     /* Constructor */
@@ -22,9 +23,11 @@ public:
 
     /* Destructor */
     ~linked_list();
-    /* Setters */
+    /* Setters */  
+    void set_passenger(Passenger person);
 
     /* Getters */
+    Passenger get_passenger()const;
 
     void add_passenger(const Passenger_list& passenger);
     void remove_passenger(const Passenger_list& passenger);
