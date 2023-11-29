@@ -12,6 +12,7 @@ private:
     int rows;
     int columns;
     Passenger person;
+    vector<vector<Seat>> seat_map;
 
 public:
     /* Constructor */
@@ -35,6 +36,7 @@ public:
     Passenger get_person()const;
 
     /* Member Functions */
+    void populate_seat_map();
     void display_seat_map(int rows, int columns, Passenger person) const;
     void save_to_file(string file_name);
 
