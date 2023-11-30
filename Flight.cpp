@@ -275,12 +275,12 @@ void Flight::save_to_file(string file_name) {
 
     Node* current = passenger_list.get_first_node();
     while(current != 0) { 
-        file << setw(20) << current->person.get_FName();
+        file << left << setw(20) << current->person.get_FName();
         file << setw(20) << current->person.get_LName();
         file << setw(20) << current->person.get_PhoneNum();
         file << current->person.get_PSeat()->get_row();
         file << setw(5) << current->person.get_PSeat()->get_column();
-        file << setw(5) << current->person.get_PID() << endl;
+        file << right << setw(5) << current->person.get_PID() << endl;
         current = current->next;
     }
 
