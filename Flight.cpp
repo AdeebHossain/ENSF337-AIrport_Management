@@ -4,13 +4,13 @@
 using namespace std;
 
 /* Constrcutors */
-Flight::Flight(): name("\0"), rows(0), columns(0), passenger_list() {}; 
+Flight::Flight(): name("\0"), rows(24), columns(5), passenger_list(), seat_map() {}; 
+    /* WILL BE CHANGED TO 0 WHEN WE READ FROM FILE */
 Flight::Flight(const Flight& source) {
     this->name = source.name;
     this->rows = source.rows;
     this->columns = source.columns;
     this->passenger_list = source.passenger_list;
-    //populate_seat_map();
 };
 
 /* Destructors */
@@ -31,10 +31,6 @@ void Flight::set_columns(int columns) {
     this->columns = columns;
 }
 
-void Flight::set_passenger(Passenger_list passenger) {
-    this->passenger_list = passenger;
-}
-
 /* Getters */
 string Flight::get_name()const {
     return this->name;
@@ -48,20 +44,11 @@ int Flight::get_columns()const {
     return this->columns;
 }
 
-Passenger_list Flight::get_passenger()const {
-    return this->passenger_list;
-}
-
-// void Flight::populate_seat_map(){
-//     for (int i = 0; i < rows; i++){
-//         for (int j = 0; j< columns; j++){
-//             seat_map[i][j].set_seat_status('0');
-//         }
-//     }
-// }
-
 void Flight::display_seat_map () const{
-    char letter = 'A'; //will be removed to use PSeat.get_column() since this will give a character
+    char letter = 'A'; 
+
+    /*  NEED IF STATEMENT TO CHECK THE ROWS AND COLUMNS OF FLIGHT, 
+        IF EITHER IS 0 IT SHOULD PRINT OUT NOTHING */
     cout << setw(columns + 1) << "" << setfill(' ') << setw(20) << left << "Aircraft Seat Map" << endl << "     ";
     for (int i = 0; i < columns; i++) {
         cout << setw(4) << letter;
@@ -76,11 +63,16 @@ void Flight::display_seat_map () const{
 
     for(int k = 0; k < rows; k++) {
         cout << setw(3) << k;
-        for(int l = 0; l <= columns; l++) {
-            cout << setw(4) << "|";
+        for(int l = 0; l < columns; l++) {
+            cout << setw(2) << "|";
+            if(seat_map[k][l] == true) {
+                cout << setw(2) << "X";
+            } else {
+                cout << setw(2) << "\0";
+            }
         }
 
-        cout << endl << "   ";
+        cout << "|" << endl << "   ";
         for (int j = 0; j < columns; j++) {
             cout << "+---";
         }
@@ -89,13 +81,50 @@ void Flight::display_seat_map () const{
 }
 
 void Flight::display_list_of_passengers()const { 
-    //Need to get seat info
-    cout << setw(15) << left << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone";
-    cout << setw(7) << "Row" << setw(8) << "Seat" << "ID" << endl;
-    for(int i = 0; i < 3; i++) {
-        cout << "------------------------------------------------------------------" << endl;
-        cout << setw(15) << passenger_list.get_LName() << setw(15) << passenger_list.get_LName() << setw(15) << passenger_list.get_PhoneNum();
-        cout << setw(7) << passenger_list.get_PSeat()->get_row() << setw(8) << passenger_list.get_PSeat()->get_column() << passenger_list.get_PID() << endl;
-    }
-    cout << "------------------------------------------------------------------" << endl;
+    passenger_list.display_passenger();
 }
+
+void Flight::add_passenger() {
+    string inputForPassenger;
+    int userNumberInput;
+    char seat;
+    Passenger* new_passenger = new Passenger;
+
+    cout << "Please enter the Passenger's ID: ";
+    cin >> userNumberInput;
+    new_passenger->set_PID(userNumberInput);
+
+    cout << "Please enter the Passenger's First Name: ";
+    cin >> inputForPassenger;
+    new_passenger->set_FName(inputForPassenger);
+
+    cout << "Please enter the Passenger's Last Name: ";
+    cin >> inputForPassenger;
+    new_passenger->set_LName(inputForPassenger);
+
+    cout << "Please enter the Passenger's Phone Number: ";
+    cin >> inputForPassenger;
+    new_passenger->set_PhoneNum(inputForPassenger);
+
+    cout << "Enter the Passenger's desired row: ";
+    cin >> userNumberInput;
+    new_passenger->get_PSeat()->set_row(userNumberInput);
+
+    cout << "Enter the Passenger's desired seat: ";
+    cin >> seat;
+    seat = toupper(seat);
+    new_passenger->get_PSeat()->set_column(seat);
+
+    seat_map[userNumberInput - 1][int(seat) - 65] = true;
+
+    passenger_list.add(*new_passenger);
+}
+
+void Flight::remove_passenger() {
+    int userInputPassengerId;
+    cout << "Please enter the id of the passenger that needs to be removed: ";
+    cin >> userInputPassengerId;
+
+    passenger_list.remove(userInputPassengerId);
+}
+

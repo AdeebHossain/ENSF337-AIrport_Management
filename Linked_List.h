@@ -4,10 +4,8 @@ using namespace std;
 
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
-
-typedef Passenger Passenger_list;
 struct Node { 
-    Passenger_list passenger;
+    Passenger person;
     Node *next;
 };
 
@@ -16,6 +14,7 @@ private:
     Node *headM;
     
 public:
+    
     /* Constructor */
     linked_list();
     linked_list (const linked_list& source);
@@ -23,12 +22,11 @@ public:
     /* Destructor */
     ~linked_list();
     /* Setters */  
-    void set_passenger(Passenger person);
 
     /* Getters */
-    Passenger get_passenger()const;
 
-    void add_passenger(const Passenger_list& passenger);
-    void remove_passenger(const Passenger_list& passenger);
+    void add(const Passenger& passenger);
+    void remove(int passengerID);
+    void display_passenger()const;
 };
 #endif

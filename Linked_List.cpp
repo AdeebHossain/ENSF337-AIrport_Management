@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "Linked_List.h"
 using namespace std;
 
@@ -14,7 +15,7 @@ linked_list::linked_list(const linked_list& source) {
     Node *newest_passenger = headM;
     const Node *source_node = source.headM;
     while(true) {
-        newest_passenger->passenger = source_node->passenger;
+        newest_passenger->person = source_node->person;
         source_node = source_node->next;
         if(source_node == 0)
             break;
@@ -36,9 +37,9 @@ linked_list::~linked_list() {
     headM = 0;
 };
 
-void linked_list::add_passenger(const Passenger_list& PAdding) {
+void linked_list::add(const Passenger& PAdding) {
     Node *new_passenger = new Node;
-    new_passenger->passenger = PAdding;
+    new_passenger->person = PAdding;
 
     if (headM == 0) {
         new_passenger->next = headM;
@@ -47,7 +48,7 @@ void linked_list::add_passenger(const Passenger_list& PAdding) {
     else {
         Node *before = headM;      // will point to node in front of new node
         Node *after = headM->next; // will be 0 or point to node after new node
-        while(after != 0 && PAdding.get_PSeat()->get_seat_status() == '\0') {
+        while(after != 0) {
             before = after;
             after = after->next;
         }
@@ -56,27 +57,41 @@ void linked_list::add_passenger(const Passenger_list& PAdding) {
     }
 }
 
-void linked_list::remove_passenger(const Passenger_list& PRemoving) {
+void linked_list::remove(int passengerID) {
     if (headM == nullptr)
         return;
 
     Node *doomed_node = 0;
-    
-    if (PRemoving.get_PSeat()->get_seat_status() == '\0') {   
+
+    if (headM->person.get_PID() == passengerID) {   
         doomed_node = headM;
         headM = headM->next;
     } else {
         Node *before = headM;
         Node *maybe_doomed = headM->next;
 
-        while (maybe_doomed != 0 && PRemoving.get_PSeat()->get_seat_status() == '\0') {
+        while (maybe_doomed != 0 && headM->person.get_PID() == passengerID) {
             before = maybe_doomed;
             maybe_doomed = maybe_doomed->next;
         }
-        if (maybe_doomed != 0 && PRemoving.get_PSeat()->get_seat_status() == '\0') {
+        if (maybe_doomed != 0 && headM->person.get_PID() == passengerID) {
             doomed_node = maybe_doomed;
             before->next = maybe_doomed->next;
         }
     }
     delete doomed_node;
+}
+
+void linked_list::display_passenger()const{
+    
+    cout << setw(15) << left << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone";
+    cout << setw(7) << "Row" << setw(8) << "Seat" << "ID" << endl;
+    //if(headM != NULL) {
+        for(const Node* current_passenger = headM; current_passenger != NULL; current_passenger = current_passenger->next) {
+            cout << "------------------------------------------------------------------" << endl;
+            cout << setw(15) << current_passenger->person.get_FName() << setw(15) << current_passenger->person.get_LName() << setw(15) << current_passenger->person.get_PhoneNum();
+            cout << setw(7) << current_passenger->person.get_PSeat()->get_row() << setw(8) << current_passenger->person.get_PSeat()->get_column() << current_passenger->person.get_PID() << endl;
+        }
+    //}
+    cout << "------------------------------------------------------------------" << endl;
 }

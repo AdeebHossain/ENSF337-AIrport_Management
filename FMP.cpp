@@ -1,10 +1,6 @@
 #include <iostream>
 #include <iomanip>
-//#include "Seat.h"
-//#include "Passenger.h"
-//#include "Flight.h"
 #include "Airline.h"
-//#include "Linked_List.h"
 using namespace std;
 
 
@@ -15,7 +11,6 @@ int validChoice(string userInput);
 
 int main () {
     string userInput;
-    string inputForPassenger;
     Airline new_airline;
 
     do{
@@ -54,39 +49,11 @@ int main () {
             break;
 
         case 3: 
-            {
-                char seat;
-                Passenger new_passenger;
-
-                cout << "Please enter the Passenger's ID: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_PID(validChoice(inputForPassenger));
-
-                cout << "Please enter the Passenger's First Name: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_FName(inputForPassenger);
-
-                cout << "Please enter the Passenger's Last Name: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_LName(inputForPassenger);
-
-                cout << "Please enter the Passenger's Phone Number: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_PhoneNum(inputForPassenger);
-
-                cout << "Enter the Passenger's desired row: ";
-                getline(cin, inputForPassenger);
-                new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
-
-                cout << "Enter the Passenger's desired seat: ";
-                cin >> seat;
-                new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
-
-                new_airline.get_flight()->set_passenger(new_passenger);
-            }
+            new_airline.get_flight()->add_passenger();
             break;
 
         case 4:
+            new_airline.get_flight()->remove_passenger();
             break;
 
         case 5:
