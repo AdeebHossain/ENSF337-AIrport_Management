@@ -95,9 +95,18 @@ void Flight::add_passenger() {
     char seat;
     Passenger* new_passenger = new Passenger;
 
+    while (true){
     cout << "Please enter the Passenger's ID: ";
     cin >> userNumberInput;
+
+    if (userNumberInput < 1000 || userNumberInput > 9999){
+        cout << "Invalid ID. Please enter an integer number between 1000 and 9999" << endl;
+        continue;
+    }
+
     new_passenger->set_PID(userNumberInput);
+    break;
+    }
 
     cout << "Please enter the Passenger's First Name: ";
     cin >> inputForPassenger;
@@ -110,17 +119,39 @@ void Flight::add_passenger() {
     cout << "Please enter the Passenger's Phone Number: ";
     cin >> inputForPassenger;
     new_passenger->set_PhoneNum(inputForPassenger);
+    
+    while (true){
+        cout << "Enter the Passenger's desired row: ";
+        cin >> userNumberInput;
 
-    cout << "Enter the Passenger's desired row: ";
-    cin >> userNumberInput;
-    new_passenger->get_PSeat()->set_row(userNumberInput);
+        if (!cin || userNumberInput < 1 || userNumberInput > rows){
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid row. Please choose a different row." << endl;
+            continue;
+        }
 
-    cout << "Enter the Passenger's desired seat: ";
-    cin >> seat;
-    seat = toupper(seat);
-    new_passenger->get_PSeat()->set_column(seat);
+        cout << "Enter the Passenger's desired seat: ";
+        cin >> seat;
+        seat = toupper(seat);
+        
+        if (!isalpha(seat) || seat < 'A' || seat > 'A' + columns - 1){
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid seat. Please choose a valid seat." << endl;
+            continue;
+        }
+        
+        if (seat_map[userNumberInput - 1][int(seat) - 65]){
+            cout <<"Seat already taken. Please choose a differnt seat."<< endl;
+            continue;
+        }
 
-    seat_map[userNumberInput - 1][int(seat) - 65] = true;
+        new_passenger->get_PSeat()->set_row(userNumberInput);
+        new_passenger->get_PSeat()->set_column(seat);
+        seat_map[userNumberInput - 1][int(seat) - 65] = true;
+        break;
+    }
 
     passenger_list.add(*new_passenger);
 }
