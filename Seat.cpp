@@ -7,12 +7,12 @@ Seat::Seat(const Seat& source) {
     this->row = source.row;
     this->column = source.column;
     this->seat_status = source.seat_status;
-}
+};
 
 /* Destructor */
 Seat::~Seat() {
     
-}
+};
 
 /* Setters */
 void Seat::set_row(int row) {

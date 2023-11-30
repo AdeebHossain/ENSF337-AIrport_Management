@@ -1,11 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include "Seat.h"
-#include "Passenger.h"
-#include "Flight.h"
 #include "Airline.h"
-#include "Linked_List.h"
 using namespace std;
 
 
@@ -17,14 +13,12 @@ void readFromFile(const string& fileName);
 
 int main () {
     string userInput;
-    string inputForPassenger;
-    Flight new_flight;
-    Passenger new_passenger;
+    Airline new_airline;
 
     do{
         displayTitlePage();    
         cout << "<<< Press Return to Continue >>>";
-        getline(cin, userInput);
+        cin.ignore();
         system("clear");
 
     } while (!userInput.empty()); //Repeats until user hits enter
@@ -39,53 +33,29 @@ int main () {
         /*  If input entered is not a number, display will keep repeating until
             it is a valid number. Then the while condition will handle anything 
             that isn't a number between 1-6. */
+
         userChoice = validChoice(userInput);
         switch (userChoice) {
         case 1:
-            new_flight.display_seat_map(24, 5, new_passenger);
+            new_airline.get_flight()->display_seat_map();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
             system("clear");
             break;
         
         case 2:
-            new_flight.get_person().display_passenger_info(new_passenger.get_FName(), new_passenger.get_LName(), new_passenger.get_PhoneNum(), new_passenger.get_PID());
+            new_airline.get_flight()->display_list_of_passengers();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
             system("clear");
             break;
 
         case 3: 
-            {
-                // char seat;
-
-                cout << "Please enter the Passenger's ID: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_PID(validChoice(inputForPassenger));
-
-                cout << "Please enter the Passenger's First Name: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_FName(inputForPassenger);
-
-                cout << "Please enter the Passenger's Last Name: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_LName(inputForPassenger);
-
-                cout << "Please enter the Passenger's Phone Number: ";
-                getline(cin, inputForPassenger);
-                new_passenger.set_PhoneNum(inputForPassenger);
-
-                // cout << "Enter the Passenger's desired row: ";
-                // getline(cin, inputForPassenger);
-                // new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
-
-                // cout << "Enter the Passenger's desired seat: ";
-                // cin >> seat;
-                // new_passenger.get_PSeat()->set_column(seat);
-            }
+            new_airline.get_flight()->add_passenger();
             break;
 
         case 4:
+            new_airline.get_flight()->remove_passenger();
             break;
 
         case 5:
@@ -102,6 +72,7 @@ int main () {
         default:
             break;
         }
+
     } while (userChoice != 6);
 
     cout << "\nProgram terminated.\n\n";
