@@ -10,7 +10,7 @@ private:
     string FName;
     string LName;
     string PhoneNum;
-    Seat *PSeat;
+    // Seat *PSeat;
     int PID;
 
 
@@ -27,17 +27,17 @@ public:
     void set_LName(string Lname);
     void set_PhoneNum(string PhoneNum);
     void set_PID(int PID);
-    void set_PSeat(Seat* PSeat);
+    // void set_PSeat(Seat* PSeat);
 
     /* Getters */
     string get_FName()const;
     string get_LName()const;
     string get_PhoneNum()const;
     int get_PID()const;
-    Seat *get_PSeat()const;
+    // Seat *get_PSeat()const;
 
     /* Member Functions*/
-    void display_passenger_info(string FName, string LName, string PhoneNum, int PID, int ROW, char COL);
+    void display_passenger_info(string FName, string LName, string PhoneNum, int PID);
 
 };
 #endif
