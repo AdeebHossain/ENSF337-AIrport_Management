@@ -51,6 +51,71 @@ int Flight::get_columns()const {
     return this->columns;
 }
 
+void Flight::readFromFile(const string& fileName) {
+    ifstream file(fileName);
+    if (!file.is_open()) {
+        cerr << "Error opening file: " << fileName << endl;
+        return;
+    }
+
+    // int rows, columns;
+    // string name;
+    file >> name >> rows >> columns;
+    resizing_seat_map(rows, columns);
+    // cout << name << " " << rows << " " << columns << endl;
+
+    // this->name = name;
+    // this->rows = rows;
+    // this->columns = columns;
+    // Read passenger information
+    string line;
+    while (getline(file, line)) {
+
+        // Kept getting an error where it tried to read the first line as empty
+        if (line.empty()) {
+            continue;
+        }
+
+        // All lines are strictly 69 characters long
+        if (line.length() < 69) { // haha funny
+            cerr << "Error: Line is too short. Length: " << line.length() << endl;
+            continue; 
+        }
+
+        // Manually parse the line
+        string firstName = line.substr(0, 20);  // 20 Characters long
+        string lastName = line.substr(20, 20);  // 20 Characters long
+        string phoneNumber = line.substr(40, 15);  // 12 characters
+        string seat = line.substr(60, 4);  // 4 characters
+        int id = stoi(line.substr(64, 5));  // 5 characters
+
+        // cout << "First Name: " << firstName << " Last Name: " << lastName
+        //      << " Phone Number: " << phoneNumber << " Seat: " << seat << " ID: " << id << endl;
+
+        size_t row_part = seat.find_first_not_of("0123456789");
+
+        int row = stoi(seat.substr(0, row_part));
+
+        char cols = seat[row_part];
+
+        // cout << "Numeric part: " << row << endl;
+        // cout << "Character part: " << cols << endl;
+
+        /* Need to create a new passenger instance and set all the values */
+        Passenger* new_passenger = new Passenger;
+        new_passenger->set_FName(firstName);
+        new_passenger->set_LName(lastName);
+        new_passenger->set_PhoneNum(phoneNumber);
+        new_passenger->set_PID(id);
+        new_passenger->get_PSeat()->set_row(row);
+        new_passenger->get_PSeat()->set_column(cols);
+        new_passenger->get_PSeat()->set_seat_status(true);
+        
+        passenger_list.add(*new_passenger);
+    }
+    file.close();
+}
+
 void Flight::display_seat_map () const{
     char letter = 'A'; 
 
@@ -206,7 +271,7 @@ void Flight::save_to_file(string file_name) {
     file << left << name << setw(5) << rows << setw(8) << columns << endl;
 
     /* Need to traverse through the linked list and collect data
-     from each node and write that data into the file*/
+       from each node and write that data into the file */
 
     Node* current = passenger_list.get_first_node();
     while(current != 0) { 
@@ -238,7 +303,7 @@ void Flight::display_list_of_passengers()const{
 
 void Flight::resizing_seat_map(int rows, int columns) {
     seat_map.resize(rows);
-    for(auto& row : seat_map) {
-        seat_map.resize(columns);
+    for(int j = 0; j < rows; j++) {
+        seat_map.at(j).resize(columns);
     }
 }

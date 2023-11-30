@@ -35,6 +35,8 @@ public:
 
 
     /* Member Functions */
+    void readFromFile(const string& fileName);
+
     void display_seat_map()const;
     void display_list_of_passengers()const;
 

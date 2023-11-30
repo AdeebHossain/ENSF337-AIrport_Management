@@ -8,13 +8,12 @@ using namespace std;
 void displayTitlePage();
 void displayMenu();
 int validChoice(string userInput);
-Flight* readFromFile(const string& fileName);
 
 
 int main () {
     string userInput;
     Airline new_airline;
-    new_airline.set_flight(readFromFile("flight_info.txt"));
+    new_airline.get_flight()->readFromFile("flight_info.txt");
 
     do{
         displayTitlePage();    
@@ -110,70 +109,3 @@ int validChoice (string userInput) {
     return userChoice;
 }
 
-Flight* readFromFile(const string& fileName) {
-    Flight* f;
-    ifstream file(fileName);
-    if (!file.is_open()) {
-        cerr << "Error opening file: " << fileName << endl;
-        return;
-    }
-
-    int rows, columns;
-    string name;
-    file >> name >> rows >> columns;
-    // cout << name << " " << rows << " " << columns << endl;
-
-    Flight flight(name, rows, columns);
-    f = &flight;
-
-    // Read passenger information
-    string line;
-    while (getline(file, line)) {
-
-        // Kept getting an error where it tried to read the first line as empty
-        if (line.empty()) {
-            continue;
-        }
-
-        // All lines are strictly 69 characters long
-        if (line.length() < 69) { // haha funny
-            cerr << "Error: Line is too short. Length: " << line.length() << endl;
-            continue; 
-        }
-
-        // Manually parse the line
-        string firstName = line.substr(0, 20);  // 20 Characters long
-        string lastName = line.substr(20, 20);  // 20 Characters long
-        string phoneNumber = line.substr(40, 15);  // 12 characters
-        string seat = line.substr(60, 4);  // 4 characters
-        int id = stoi(line.substr(64, 5));  // 5 characters
-
-        // cout << "First Name: " << firstName << " Last Name: " << lastName
-        //      << " Phone Number: " << phoneNumber << " Seat: " << seat << " ID: " << id << endl;
-
-        size_t row_part = seat.find_first_not_of("0123456789");
-
-        int row = stoi(seat.substr(0, row_part));
-
-        char cols = seat[row_part];
-
-        // cout << "Numeric part: " << row << endl;
-        // cout << "Character part: " << cols << endl;
-
-        /* Need to create a new passenger instance and set all the values */
-        Passenger new_passenger;
-        new_passenger.set_FName(firstName);
-        new_passenger.set_LName(lastName);
-        new_passenger.set_PhoneNum(phoneNumber);
-        new_passenger.set_PID(id);
-
-        Seat* new_seat;
-        
-
-
-    }
-
-    return f;
-
-    file.close();
-}
