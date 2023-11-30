@@ -86,12 +86,13 @@ void linked_list::display_passenger()const{
     
     cout << setw(15) << left << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone";
     cout << setw(7) << "Row" << setw(8) << "Seat" << "ID" << endl;
-    //if(headM != NULL) {
-        for(const Node* current_passenger = headM; current_passenger != NULL; current_passenger = current_passenger->next) {
-            cout << "------------------------------------------------------------------" << endl;
-            cout << setw(15) << current_passenger->person.get_FName() << setw(15) << current_passenger->person.get_LName() << setw(15) << current_passenger->person.get_PhoneNum();
-            cout << setw(7) << current_passenger->person.get_PSeat()->get_row() << setw(8) << current_passenger->person.get_PSeat()->get_column() << current_passenger->person.get_PID() << endl;
-        }
-    //}
+
+    for(const Node* current_passenger = headM; current_passenger != NULL; current_passenger = current_passenger->next) {
+        cout << "------------------------------------------------------------------" << endl;
+        cout << setw(15) << current_passenger->person.get_FName() << setw(15) << current_passenger->person.get_LName() << setw(15) << current_passenger->person.get_PhoneNum();
+        cout << setw(7) << current_passenger->person.get_PSeat()->get_row() << setw(8) << current_passenger->person.get_PSeat()->get_column() << current_passenger->person.get_PID();
+        cout << endl;
+    }
+
     cout << "------------------------------------------------------------------" << endl;
 }

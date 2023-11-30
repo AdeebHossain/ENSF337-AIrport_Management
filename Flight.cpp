@@ -9,7 +9,7 @@ using namespace std;
 
 Flight::Flight(): name("\0"), rows(24), columns(5), passenger_list(), seat_map() {}; 
     /* WILL BE CHANGED TO 0 WHEN WE READ FROM FILE */
-Flight::Flight(string Name, int num_row, int num_col): name(Name), rows(num_row), columns(num_col), person() { };
+Flight::Flight(string Name, int num_row, int num_col): name(Name), rows(num_row), columns(num_col), passenger_list(), seat_map() { };
 
 Flight::Flight(const Flight& source) {
     this->name = source.name;
@@ -133,26 +133,34 @@ void Flight::remove_passenger() {
     passenger_list.remove(userInputPassengerId);
 }
 
-void Flight::save_to_file(string file_name) {
-    ofstream file(file_name);
-    if (!file.is_open()) {
-        cerr << "Error opening file: " << file_name << endl;
-        return;
-    }
-    file << name << rows << columns << endl;
+/*  
+    LOL, Unfortunately you can't access the linkedlist here... sorry T-T
+    So this whole bottom part is not going to work, i'll help you on it
+    tmr
 
-    /* Need to traverse through the linked list and collect data
-     from each node and write that data into the file*/
+    - Aidan 
+*/
+
+// void Flight::save_to_file(string file_name) {
+//     ofstream file(file_name);
+//     if (!file.is_open()) {
+//         cerr << "Error opening file: " << file_name << endl;
+//         return;
+//     }
+//     file << name << rows << columns << endl;
+
+//     /* Need to traverse through the linked list and collect data
+//      from each node and write that data into the file*/
 
     
-    Node* current = person.headM;
-    while(*current != 0) {
-        file << setw(20) << current->passenger.get_FName();
-        file << setw(20) << current->passenger.get_LName();
-        file << setw(15) << current->passenger.get_PhoneNum();
-        file << setw(4) << current->passenger.get_PSeat();
-        file << setw(5) << current->passenger.get_PID() << endl;
-        current = current->next;
-    }
+//     Node* current = person.headM;
+//     while(*current != 0) {
+//         file << setw(20) << current->passenger.get_FName();
+//         file << setw(20) << current->passenger.get_LName();
+//         file << setw(15) << current->passenger.get_PhoneNum();
+//         file << setw(4) << current->passenger.get_PSeat();
+//         file << setw(5) << current->passenger.get_PID() << endl;
+//         current = current->next;
+//     }
         
-}
+// }
