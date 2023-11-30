@@ -40,14 +40,14 @@ int main () {
         userChoice = validChoice(userInput);
         switch (userChoice) {
         case 1:
-            new_airline.get_flight().display_seat_map();
+            new_airline.get_flight()->display_seat_map();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
             system("clear");
             break;
         
         case 2:
-            new_airline.get_flight().display_list_of_passengers();
+            new_airline.get_flight()->display_list_of_passengers();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
             system("clear");
@@ -82,7 +82,7 @@ int main () {
                 cin >> seat;
                 new_passenger.get_PSeat()->set_row(validChoice(inputForPassenger));
 
-                new_airline.get_flight().set_passenger(new_passenger);
+                new_airline.get_flight()->set_passenger(new_passenger);
             }
             break;
 

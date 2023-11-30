@@ -5,7 +5,7 @@ using namespace std;
 #define AIRLINE_H
 class Airline {
 private:
-    Flight new_flight;
+    Flight* new_flight;
 public:
 /* Constructor */
     Airline();
@@ -13,8 +13,8 @@ public:
 /* Destructor */
     ~Airline();
 /* Setters */
-    void set_flight(Flight new_flight);
+    void set_flight(Flight* new_flight);
 /* Getters */
-    Flight get_flight()const;
+    Flight* get_flight()const;
 };
 #endif

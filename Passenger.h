@@ -37,7 +37,7 @@ public:
     Seat *get_PSeat()const;
 
     /* Member Functions*/
-    void display_passenger_info()const;
+    
 
 };
 #endif
