@@ -65,6 +65,18 @@ void readFromFile(const string& fileName) {
         cout << "First Name: " << firstName << " Last Name: " << lastName
              << " Phone Number: " << phoneNumber << " Seat: " << seat << " ID: " << id << endl;
 
+        size_t row_part = seat.find_first_not_of("0123456789");
+
+        // Extract the numeric part
+        int row = stoi(seat.substr(0, row_part));
+
+        // Extract the character part
+        char cols = seat[row_part];
+
+        // Output the results
+        cout << "Numeric part: " << row << endl;
+        cout << "Character part: " << cols << endl;
+
     }
 
     file.close();
