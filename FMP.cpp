@@ -118,7 +118,7 @@ void readFromFile(const string& fileName) {
     int rows, columns;
     string name;
     file >> name >> rows >> columns;
-    cout << name << " " << rows << " " << columns << endl;
+    // cout << name << " " << rows << " " << columns << endl;
 
     Flight flight(name, rows, columns);
 
@@ -144,9 +144,19 @@ void readFromFile(const string& fileName) {
         string seat = line.substr(60, 4);  // 4 characters
         int id = stoi(line.substr(64, 5));  // 5 characters
 
-        cout << "First Name: " << firstName << " Last Name: " << lastName
-             << " Phone Number: " << phoneNumber << " Seat: " << seat << " ID: " << id << endl;
+        // cout << "First Name: " << firstName << " Last Name: " << lastName
+        //      << " Phone Number: " << phoneNumber << " Seat: " << seat << " ID: " << id << endl;
 
+        size_t row_part = seat.find_first_not_of("0123456789");
+
+        // Extract the numeric part
+        int row = stoi(seat.substr(0, row_part));
+
+        // Extract the character part
+        char cols = seat[row_part];
+
+        // cout << "Numeric part: " << row << endl;
+        // cout << "Character part: " << cols << endl;
     }
 
     file.close();
