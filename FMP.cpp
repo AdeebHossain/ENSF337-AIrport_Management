@@ -8,12 +8,13 @@ using namespace std;
 void displayTitlePage();
 void displayMenu();
 int validChoice(string userInput);
-void readFromFile(const string& fileName);
+Flight* readFromFile(const string& fileName);
 
 
 int main () {
     string userInput;
     Airline new_airline;
+    new_airline.set_flight(readFromFile("flight_info.txt"));
 
     do{
         displayTitlePage();    
@@ -63,6 +64,7 @@ int main () {
             getline(cin, userInput);
             if(userInput == "Y" || userInput == "y") {
                 cout << "\nAll the data in the passenger list was saved into the flight_info.txt." << endl;
+                new_airline.get_flight()->save_to_file("flight_info.txt");
             }
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
@@ -108,7 +110,8 @@ int validChoice (string userInput) {
     return userChoice;
 }
 
-void readFromFile(const string& fileName) {
+Flight* readFromFile(const string& fileName) {
+    Flight* f;
     ifstream file(fileName);
     if (!file.is_open()) {
         cerr << "Error opening file: " << fileName << endl;
@@ -121,6 +124,7 @@ void readFromFile(const string& fileName) {
     // cout << name << " " << rows << " " << columns << endl;
 
     Flight flight(name, rows, columns);
+    f = &flight;
 
     // Read passenger information
     string line;
@@ -149,15 +153,27 @@ void readFromFile(const string& fileName) {
 
         size_t row_part = seat.find_first_not_of("0123456789");
 
-        // Extract the numeric part
         int row = stoi(seat.substr(0, row_part));
 
-        // Extract the character part
         char cols = seat[row_part];
 
         // cout << "Numeric part: " << row << endl;
         // cout << "Character part: " << cols << endl;
+
+        /* Need to create a new passenger instance and set all the values */
+        Passenger new_passenger;
+        new_passenger.set_FName(firstName);
+        new_passenger.set_LName(lastName);
+        new_passenger.set_PhoneNum(phoneNumber);
+        new_passenger.set_PID(id);
+
+        Seat* new_seat;
+        
+
+
     }
+
+    return f;
 
     file.close();
 }
