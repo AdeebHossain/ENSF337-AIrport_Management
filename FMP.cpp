@@ -1,10 +1,10 @@
 #include <iostream>
 #include <iomanip>
-#include "Seat.h"
-#include "Passenger.h"
-#include "Flight.h"
+//#include "Seat.h"
+//#include "Passenger.h"
+//#include "Flight.h"
 #include "Airline.h"
-#include "Linked_List.h"
+//#include "Linked_List.h"
 using namespace std;
 
 
@@ -42,14 +42,14 @@ int main () {
         case 1:
             new_airline.get_flight().display_seat_map();
             cout << "\n<<< Press Return to Continue >>>";
-            cin.ignore();
+            getline(cin, userInput);
             system("clear");
             break;
         
         case 2:
             new_airline.get_flight().display_list_of_passengers();
             cout << "\n<<< Press Return to Continue >>>";
-            cin.ignore();
+            getline(cin, userInput);
             system("clear");
             break;
 
@@ -100,7 +100,7 @@ int main () {
             system("clear");
             break;
 
-        case 6:
+        default:
             break;
         }
 

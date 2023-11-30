@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string>
-#include <cassert>
 #include "Flight.h"
 using namespace std;
 
