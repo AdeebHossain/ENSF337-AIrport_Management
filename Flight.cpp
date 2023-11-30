@@ -99,7 +99,9 @@ void Flight::add_passenger() {
     cout << "Please enter the Passenger's ID: ";
     cin >> userNumberInput;
 
-    if (userNumberInput < 1000 || userNumberInput > 9999){
+    if (!cin || userNumberInput < 1000 || userNumberInput > 9999){
+        cin.clear();
+        cin.ignore(10000, '\n');
         cout << "Invalid ID. Please enter an integer number between 1000 and 9999" << endl;
         continue;
     }
