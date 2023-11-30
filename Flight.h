@@ -1,4 +1,5 @@
 #include "Linked_List.h"
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -16,6 +17,7 @@ private:
 public:
     /* Constructor */
     Flight();
+    Flight(string Name, int num_row, int num_col);
     Flight(const Flight& source);
 
     /* Destructors */
@@ -33,9 +35,9 @@ public:
 
 
     /* Member Functions */
-    void populate_seat_map();
     void display_seat_map()const;
     void display_list_of_passengers()const;
+    void save_to_file(string file_name);
 
     void add_passenger();
     void remove_passenger();
