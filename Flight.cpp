@@ -267,18 +267,21 @@ void Flight::save_to_file(string file_name) {
         cerr << "Error opening file: " << file_name << endl;
         return;
     }
-    file << left <<setw(9) << name << setw(5) << rows << columns << endl;
+    file << left <<setw(9) << name << setw(4) << rows << columns << endl;
 
     /* Need to traverse through the linked list and collect data
        from each node and write that data into the file */
 
     Node* current = passenger_list.get_first_node();
-    while(current != 0) { 
+    while (current != nullptr) {
         file << left << setw(20) << current->person.get_FName();
         file << setw(20) << current->person.get_LName();
         file << setw(20) << current->person.get_PhoneNum();
-        file << current->person.get_PSeat()->get_row();
-        file << setw(5) << current->person.get_PSeat()->get_column();
+        if(current->person.get_PSeat()->get_row() > 9){
+            file << current->person.get_PSeat()->get_row() << setw(2) << current->person.get_PSeat()->get_column();
+        }
+        else file << current->person.get_PSeat()->get_row() << setw(3) << current->person.get_PSeat()->get_column();
+        // file << setw(5) << current->person.get_PSeat()->get_column();
         file << right << setw(5) << current->person.get_PID() << endl;
         current = current->next;
     }
@@ -287,17 +290,17 @@ void Flight::save_to_file(string file_name) {
 }
 
 void Flight::display_list_of_passengers()const{
-    cout << setw(15) << left << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone";
+    cout << setw(20) << left << "First Name" << setw(20) << "Last Name" << setw(15) << "Phone";
     cout << setw(7) << "Row" << setw(8) << "Seat" << "ID" << endl;
 
     for(const Node* current_passenger = passenger_list.get_first_node(); current_passenger != NULL; current_passenger = current_passenger->next) {
-        cout << "------------------------------------------------------------------" << endl;
-        cout << setw(15) << current_passenger->person.get_FName() << setw(15) << current_passenger->person.get_LName() << setw(15) << current_passenger->person.get_PhoneNum();
+        cout << "-----------------------------------------------------------------------------" << endl;
+        cout << setw(20) << current_passenger->person.get_FName() << setw(20) << current_passenger->person.get_LName() << setw(15) << current_passenger->person.get_PhoneNum();
         cout << setw(7) << current_passenger->person.get_PSeat()->get_row() << setw(8) << current_passenger->person.get_PSeat()->get_column() << current_passenger->person.get_PID();
         cout << endl;
     }
 
-    cout << "----------------------------------------------------------------------" << endl;
+    cout << "-----------------------------------------------------------------------------" << endl;
 }
 
 void Flight::resizing_seat_map(int rows, int columns) {
