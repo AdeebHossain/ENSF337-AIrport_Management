@@ -12,7 +12,7 @@ private:
     int rows;
     int columns;
     linked_list passenger_list;
-    bool seat_map [24][5]; 
+    vector<vector<bool>> seat_map; 
 
 public:
     /* Constructor */
@@ -35,11 +35,15 @@ public:
 
 
     /* Member Functions */
+    void readFromFile(const string& fileName);
+
     void display_seat_map()const;
     void display_list_of_passengers()const;
-    void save_to_file(string file_name);
 
     void add_passenger();
     void remove_passenger();
+    void resizing_seat_map(int rows, int columns);
+
+    void save_to_file(string file_name);
 };
 #endif

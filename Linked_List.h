@@ -23,10 +23,8 @@ public:
     ~linked_list();
     /* Setters */  
 
-    /* Getters */
-
+    Node* get_first_node()const;
     void add(const Passenger& passenger);
     void remove(int passengerID);
-    void display_passenger()const;
 };
 #endif
