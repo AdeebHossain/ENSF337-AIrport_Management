@@ -62,8 +62,10 @@ void linked_list::add(const Passenger& PAdding) {
 }
 
 void linked_list::remove(int passengerID) {
-    if (headM == nullptr)
+    if (headM == nullptr) {
+        cout << "DEBUGGING" << endl;
         return;
+    }
 
     Node *doomed_node = 0;
 
@@ -74,11 +76,12 @@ void linked_list::remove(int passengerID) {
         Node *before = headM;
         Node *maybe_doomed = headM->next;
 
-        while (maybe_doomed != 0 && headM->person.get_PID() == passengerID) {
+        while (maybe_doomed != 0 && maybe_doomed->person.get_PID() != passengerID) {
             before = maybe_doomed;
             maybe_doomed = maybe_doomed->next;
         }
-        if (maybe_doomed != 0 && headM->person.get_PID() == passengerID) {
+
+        if (maybe_doomed != 0 && maybe_doomed->person.get_PID() == passengerID) {
             doomed_node = maybe_doomed;
             before->next = maybe_doomed->next;
         }

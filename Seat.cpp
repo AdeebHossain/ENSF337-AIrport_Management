@@ -2,7 +2,7 @@
 using namespace std;
 
 /* Constructor */
-Seat::Seat(): row(0), column('\0'), seat_status('\0') {};
+Seat::Seat(): row(0), column('\0'), seat_status(false) {};
 Seat::Seat(const Seat& source) {
     this->row = source.row;
     this->column = source.column;
@@ -23,7 +23,7 @@ void Seat::set_column(char column) {
     this->column = column;
 }
 
-void Seat::set_seat_status(char seat_status) {
+void Seat::set_seat_status(bool seat_status) {
     this->seat_status = seat_status;
 }
 
@@ -36,7 +36,7 @@ char Seat::get_column()const {
     return this->column;
 }
 
-char Seat::get_seat_status()const {
+bool Seat::get_seat_status()const {
     return this->seat_status;
 }
 

@@ -14,12 +14,18 @@ int main () {
     string userInput;
     Airline new_airline;
     new_airline.get_flight()->readFromFile("flight_info.txt");
-
+    
+    /* Debugging */
+    // if(new_airline.get_flight() == NULL) {
+    //     cout << "ITS NOT READIN SHIT" << endl;
+    //     return 0;
+    // }
+    
     do{
         displayTitlePage();    
         cout << "<<< Press Return to Continue >>>";
         cin.ignore();
-        system("clear");
+        //system("clear");
 
     } while (!userInput.empty()); //Repeats until user hits enter
 
@@ -40,14 +46,14 @@ int main () {
             new_airline.get_flight()->display_seat_map();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
-            system("clear");
+            //system("clear");
             break;
         
         case 2:
             new_airline.get_flight()->display_list_of_passengers();
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
-            system("clear");
+            //system("clear");
             break;
 
         case 3: 
@@ -67,7 +73,7 @@ int main () {
             }
             cout << "\n<<< Press Return to Continue >>>";
             getline(cin, userInput);
-            system("clear");
+            //system("clear");
             break;
 
         default:
