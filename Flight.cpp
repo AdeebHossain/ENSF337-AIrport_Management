@@ -58,16 +58,9 @@ void Flight::readFromFile(const string& fileName) {
         return;
     }
 
-    // int rows, columns;
-    // string name;
     file >> name >> rows >> columns;
     resizing_seat_map(rows, columns);
-    // cout << name << " " << rows << " " << columns << endl;
 
-    // this->name = name;
-    // this->rows = rows;
-    // this->columns = columns;
-    // Read passenger information
     string line;
     while (getline(file, line)) {
 
@@ -89,17 +82,11 @@ void Flight::readFromFile(const string& fileName) {
         string seat = line.substr(60, 4);  // 4 characters
         int id = stoi(line.substr(64, 5));  // 5 characters
 
-        // cout << "First Name: " << firstName << " Last Name: " << lastName
-        //      << " Phone Number: " << phoneNumber << " Seat: " << seat << " ID: " << id << endl;
-
         size_t row_part = seat.find_first_not_of("0123456789");
 
         int row = stoi(seat.substr(0, row_part));
 
         char cols = seat[row_part];
-
-        // cout << "Numeric part: " << row << endl;
-        // cout << "Character part: " << cols << endl;
 
         /* Need to create a new passenger instance and set all the values */
         Passenger* new_passenger = new Passenger;
@@ -110,6 +97,7 @@ void Flight::readFromFile(const string& fileName) {
         new_passenger->get_PSeat()->set_row(row);
         new_passenger->get_PSeat()->set_column(cols);
         new_passenger->get_PSeat()->set_seat_status(true);
+        seat_map.at(row - 1).at(int(toupper(cols)) - 65) = true;
         
         passenger_list.add(*new_passenger);
     }
@@ -117,10 +105,12 @@ void Flight::readFromFile(const string& fileName) {
 }
 
 void Flight::display_seat_map () const{
+    //Displays nothing when empty
+    if(columns == 0 || rows == 0)
+        return;
+
     char letter = 'A'; 
 
-    /*  NEED IF STATEMENT TO CHECK THE ROWS AND COLUMNS OF FLIGHT, 
-        IF EITHER IS 0 IT SHOULD PRINT OUT NOTHING */
     cout << setw(columns + 1) << "" << setfill(' ') << setw(20) << left << "Aircraft Seat Map" << endl << "     ";
     for (int i = 0; i < columns; i++) {
         cout << setw(4) << letter;
@@ -176,7 +166,6 @@ void Flight::add_passenger() {
         for(Node *temp = passenger_list.get_first_node(); temp != NULL; temp = temp->next) {
             if(temp->person.get_PID() == userNumberInput) {
                 is_new_passenger = false;
-                delete temp;
                 break;
             }
         }
@@ -226,12 +215,12 @@ void Flight::add_passenger() {
         }
         
         if (seat_map.at(userNumberInput - 1).at(int(seat) - 65)){
-            cout <<"Seat already taken. Please choose a differnt seat."<< endl;
+            cout <<"Seat already taken. Please choose a different seat."<< endl;
             continue;
         }
-
         new_passenger->get_PSeat()->set_row(userNumberInput);
         new_passenger->get_PSeat()->set_column(seat);
+        new_passenger->get_PSeat()->set_seat_status(true);
         seat_map[userNumberInput - 1][int(seat) - 65] = true;
         break;
     }
@@ -241,25 +230,42 @@ void Flight::add_passenger() {
 
 void Flight::remove_passenger() {
     int userInputPassengerId;
-    Node *temp = passenger_list.get_first_node();
 
-    cout << "Please enter the id of the passenger that needs to be removed: ";
-    cin >> userInputPassengerId;
+    while(true) {
+        cout << "Please enter the id of the passenger that needs to be removed: ";
+        cin >> userInputPassengerId;
+        
+        if (!cin || userInputPassengerId < 10000 || userInputPassengerId > 99999) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid ID. Please enter an integer number between 10000 and 99999" << endl;
+            continue;
+        } 
 
-    //Getting the position of the seat
-    int column = int(toupper(temp->person.get_PSeat()->get_column())) - 65;
-    int row = temp->person.get_PSeat()->get_row() - 1;
+        break;
+    }
 
-    //Removing the 'X' in the seap map
-    for(temp = passenger_list.get_first_node(); temp != NULL; temp = temp->next) {
+    //If there are no passengers to remove
+    if(passenger_list.get_first_node() == NULL) {
+        //cout << "DEBUG\n";
+        return;
+    }
+
+
+    for(Node *temp = passenger_list.get_first_node(); temp != NULL; temp = temp->next) {
+        
+        //Getting the position of the passener's seat
+        int row = temp->person.get_PSeat()->get_row() - 1;
+        int column = int(toupper(temp->person.get_PSeat()->get_column())) - 65;
+
+        //Removing the 'X' in the seap map
         if(temp->person.get_PID() == userInputPassengerId) {
             seat_map.at(row).at(column) = false;
+            passenger_list.remove(userInputPassengerId);
+            //DEBUGGING
+            //cout << "\nSuccessfully removed passenger\n";
         }
     }
-    
-    passenger_list.remove(userInputPassengerId);
-    delete temp;
-    
 }
 
 void Flight::save_to_file(string file_name) {
