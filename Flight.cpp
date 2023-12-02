@@ -132,11 +132,11 @@ void Flight::display_seat_map () const{
     }
     cout << "+" << endl;
 
-    for(int k = 0; k < rows; k++) {
+    for(int k = 1; k <= rows; k++) {
         cout << setw(3) << k;
         for(int l = 0; l < columns; l++) {
             cout << setw(2) << "|";
-            if(seat_map.at(k).at(l)) {
+            if(seat_map.at(k-1).at(l)) {
                 cout << setw(2) << "X";
             } else {
                 cout << setw(2) << "\0";
