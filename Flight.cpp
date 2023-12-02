@@ -71,7 +71,7 @@ void Flight::readFromFile(const string& fileName) {
 
         // All lines are strictly 69 characters long
         if (line.length() < 69) { // haha funny
-            cerr << "Error: Line is too short. Length: " << line.length() << endl;
+            // cerr << "Error: Line is too short. Length: " << line.length() << endl;
             continue; 
         }
 
