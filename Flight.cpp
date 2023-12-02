@@ -179,20 +179,56 @@ void Flight::add_passenger() {
         new_passenger->set_PID(userNumberInput);
         break;
     }
+    cin.ignore(); //Ignores cin from when user inputted passenger ID
 
     cout << "Please enter the Passenger's First Name: ";
-    cin >> inputForPassenger;
+    getline(cin, inputForPassenger);
     new_passenger->set_FName(inputForPassenger);
 
     cout << "Please enter the Passenger's Last Name: ";
-    cin >> inputForPassenger;
+    getline(cin, inputForPassenger);
     new_passenger->set_LName(inputForPassenger);
 
-    cout << "Please enter the Passenger's Phone Number: ";
-    cin >> inputForPassenger;
-    new_passenger->set_PhoneNum(inputForPassenger);
+    while(true) {
+        string first_three, second_three, third_three;
+        string phone_number;
+        bool invalid_num = false;
+        cout << "Please enter the Passenger's Phone Number in the format ### ### ####: ";
+        getline(cin, inputForPassenger);
+
+        if(inputForPassenger.size() != 12) {
+            cout << "\nInvalid Phone Number.\n";
+            continue;
+        }
+
+        for(int i = 0; i < 12; i++) {
+            if(inputForPassenger.at(i) != ' ')
+                phone_number += inputForPassenger.at(i);
+        }
+
+        if(phone_number.size() != 10) {
+            cout << "\nInvalid Phone Number.\n";
+            continue;
+        }
+
+        for(int j = 0; j < 10; j++) {
+            if(int(phone_number.at(j) - '0') < 0 || int(phone_number.at(j) - '0') > 9) {
+                invalid_num = true;
+                break;
+            }
+        }
+
+        if(invalid_num) {
+            cout << "Invalid Phone Number. Enter in Digits Only!\n";
+        } else {
+            inputForPassenger = phone_number.substr(0, 3) + "-" + phone_number.substr(3, 3) + "-" + phone_number.substr(6, 4);
+            new_passenger->set_PhoneNum(inputForPassenger);
+            break;
+        }
+    }
     
     while (true){
+        //cin.ignore();
         cout << "Enter the Passenger's desired row: ";
         cin >> userNumberInput;
 
@@ -226,6 +262,7 @@ void Flight::add_passenger() {
     }
 
     passenger_list.add(*new_passenger);
+    cin.ignore();
 }
 
 void Flight::remove_passenger() {
@@ -251,7 +288,6 @@ void Flight::remove_passenger() {
         return;
     }
 
-
     for(Node *temp = passenger_list.get_first_node(); temp != NULL; temp = temp->next) {
         
         //Getting the position of the passener's seat
@@ -266,6 +302,7 @@ void Flight::remove_passenger() {
             //cout << "\nSuccessfully removed passenger\n";
         }
     }
+    cin.ignore();
 }
 
 void Flight::save_to_file(string file_name) {
