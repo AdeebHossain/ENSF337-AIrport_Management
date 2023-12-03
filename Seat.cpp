@@ -40,4 +40,3 @@ bool Seat::get_seat_status()const {
     return this->seat_status;
 }
 
-/*Member Functions*/

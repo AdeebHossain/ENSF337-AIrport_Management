@@ -15,12 +15,6 @@ int main () {
     Airline new_airline;
     new_airline.get_flight()->readFromFile("flight_info.txt");
     
-    /* Debugging */
-    // if(new_airline.get_flight() == NULL) {
-    //     cout << "ITS NOT READIN SHIT" << endl;
-    //     return 0;
-    // }
-    
     do{
         displayTitlePage();    
         cout << "<<< Press Return to Continue >>>";
@@ -90,7 +84,7 @@ int main () {
 void displayTitlePage () {
     cout << "Version: 1.0\n"
          << "Term Project - Flight Management Program in C++\n"
-         << "Produced by: Your Dad\n"
+         << "Produced by: Aiden Huang, Adeeb Hossain, Jonas Huber\n"
          << "Year: 2023\n\n";
 }
 

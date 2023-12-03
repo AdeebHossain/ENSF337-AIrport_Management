@@ -36,7 +36,6 @@ public:
     int get_PID()const;
     Seat *get_PSeat()const;
 
-    /* Member Functions*/
     
 
 };

@@ -61,5 +61,4 @@
         return this->PID;
     }
 
-    /* Member Functions*/
 

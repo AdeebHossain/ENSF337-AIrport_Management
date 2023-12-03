@@ -27,8 +27,6 @@ public:
     int get_row()const;
     char get_column()const;
     bool get_seat_status()const;
-
-    /*Member Functions*/
     
 
 };
