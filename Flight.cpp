@@ -305,7 +305,7 @@ void Flight::save_to_file(string file_name) {
         cerr << "Error opening file: " << file_name << endl;
         return;
     }
-    file << left << name << setw(5) << rows << setw(8) << columns << endl;
+    file << left << setw(9) << name << setw(5) << rows << setw(8) << columns << endl;
 
     /* Need to traverse through the linked list and collect data
        from each node and write that data into the file */
