@@ -64,14 +64,12 @@ void Flight::readFromFile(const string& fileName) {
     string line;
     while (getline(file, line)) {
 
-        // Kept getting an error where it tried to read the first line as empty
         if (line.empty()) {
             continue;
         }
 
         // All lines are strictly 69 characters long
-        if (line.length() < 69) { // haha funny
-            // cerr << "Error: Line is too short. Length: " << line.length() << endl;
+        if (line.length() < 69) {
             continue; 
         }
 
@@ -88,7 +86,6 @@ void Flight::readFromFile(const string& fileName) {
 
         char cols = seat[row_part];
 
-        /* Need to create a new passenger instance and set all the values */
         Passenger* new_passenger = new Passenger;
         new_passenger->set_FName(firstName);
         new_passenger->set_LName(lastName);
@@ -284,7 +281,6 @@ void Flight::remove_passenger() {
 
     //If there are no passengers to remove
     if(passenger_list.get_first_node() == NULL) {
-        //cout << "DEBUG\n";
         return;
     }
 
@@ -298,8 +294,6 @@ void Flight::remove_passenger() {
         if(temp->person.get_PID() == userInputPassengerId) {
             seat_map.at(row).at(column) = false;
             passenger_list.remove(userInputPassengerId);
-            //DEBUGGING
-            //cout << "\nSuccessfully removed passenger\n";
         }
     }
     cin.ignore();
