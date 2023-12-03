@@ -84,7 +84,7 @@ int main () {
 void displayTitlePage () {
     cout << "Version: 1.0\n"
          << "Term Project - Flight Management Program in C++\n"
-         << "Produced by: Aiden Huang, Adeeb Hossain, Jonas Huber\n"
+         << "Produced by: Aidan Huang, Adeeb Hossain, Jonas Huber\n"
          << "Year: 2023\n\n";
 }
 
